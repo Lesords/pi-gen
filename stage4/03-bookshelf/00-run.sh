@@ -1,7 +1,9 @@
 #!/bin/sh -e
 
 BOOKSHELF_URL="https://magpi.raspberrypi.com/bookshelf.xml"
-GUIDE_URL="$(curl -s "$BOOKSHELF_URL" | awk -F '[<>]' "/<TITLE>Raspberry Pi Beginner's Guide .*<\/TITLE>/ {f=1; next} f==1 && /PDF/ {print \$3; exit}")"
+
+# GUIDE_URL="$(curl -s "$BOOKSHELF_URL" | awk -F '[<>]' "/<TITLE>Raspberry Pi Beginner's Guide .*<\/TITLE>/ {f=1; next} f==1 && /PDF/ {print \$3; exit}")"
+GUIDE_URL="https://bookshelfproxy.raspberrypi.com/downloads/eyJfcmFpbHMiOnsiZGF0YSI6OTkzNywicHVyIjoiYmxvYl9pZCJ9fQ==--2d8467e020d27e1ae8c64724cdd9d47ae1d1d253/BeginnersGuide-5thEd-Eng_v4.pdf"
 OUTPUT="$(basename "$GUIDE_URL" | cut -f1 -d'?')"
 
 if [ ! -f "files/$OUTPUT" ]; then
